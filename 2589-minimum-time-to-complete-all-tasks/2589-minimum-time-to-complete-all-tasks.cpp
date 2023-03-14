@@ -11,23 +11,18 @@ public:
         
         for(auto task : tasks){
             int count = task[2];
-            for(int i = task[1] ; i >= task[0] ; i--){
-                if(count == 0)
-                    break;
+            for(int i = task[1] ; i >= task[0] && count != 0 ; i--){
                 if(vis.find(i) != vis.end())
                     count--;
             }
             
-            if(count > 0){
-                for(int i = task[1] ; i >= task[0] ; i--){
-                    if(count == 0)
-                        break;
-                    if(vis.find(i) == vis.end()){
-                        vis.insert(i);
-                        count--;
-                    }
+            for(int i = task[1] ; i >= task[0] && count != 0 ; i--){
+                if(vis.find(i) == vis.end()){
+                    vis.insert(i);
+                    count--;
                 }
             }
+            
         }
         
         return vis.size();
