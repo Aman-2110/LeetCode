@@ -1,13 +1,12 @@
 class Solution {
 public:
     string finalString(string s) {
-        string res = "";
-        for(char c : s){
-            if(c == 'i')
-                reverse(res.begin(), res.end());
+        string a = "", b = "";
+        for (char c : s)
+            if (c == 'i')
+                swap(a, b);
             else
-                res.push_back(c);
-        }
-        return res;
+                a += c;
+        return string(rbegin(b), rend(b)) + a;
     }
 };
