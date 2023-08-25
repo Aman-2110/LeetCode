@@ -29,12 +29,14 @@ public:
                 flag = true;
         }
 
+        vector<bool> vis(2, false);
+        vis[0] = true;
         vector<int> dp(n, -1);
         long res = 0;
         for(int i = 0 ; i < n ; i++){
-            if(s[i] == '1'){
+            if(!vis[s[i] - '0']){
+                vis[s[i] - '0'] = true;
                 res = (res + dfs(i, uniqRight, dp, s))%mod;
-                break;
             }
         }
 
