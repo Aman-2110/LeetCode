@@ -19,7 +19,15 @@ public:
 
     int findLongestChain(vector<vector<int>>& pairs) {
         sort(pairs.begin(), pairs.end(), comp);
-        int res = helper(0, pairs, -1001);
-        return res;
+        int last = -1001, count = 0;
+        
+        for(int i = 0 ; i < pairs.size() ; i++){
+            if(pairs[i][0] > last){
+                count++;
+                last = pairs[i][1];
+            }
+        }
+
+        return count;
     }
 };
