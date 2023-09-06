@@ -15,7 +15,7 @@ public:
     }
 
     TreeAncestor(int n, vector<int>& parent) {
-        order = 20;
+        order = ceil(log2(n));
         up.resize(n, vector<int> (order));
         depth.resize(n);
         vector<vector<int>> child(n);
