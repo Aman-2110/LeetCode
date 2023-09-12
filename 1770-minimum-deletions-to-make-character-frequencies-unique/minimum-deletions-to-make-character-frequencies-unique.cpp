@@ -10,11 +10,7 @@ public:
             vec.push_back(p.second);
 
         sort(vec.begin(), vec.end(), greater<int>());
-        for(int i : vec)
-            cout << i << " ";
-        cout << endl;
         int last = vec[0], count = 0;
-        cout << "0 ";
         for(int i = 1 ; i < vec.size() ; i++){
             if(vec[i - 1] == 0){
                 count += vec[i];
@@ -23,7 +19,6 @@ public:
                 count += vec[i] - vec[i - 1] + 1;
                 vec[i] = vec[i - 1] - 1;
             }
-            cout << count << " ";
         }
         return count;
     }
