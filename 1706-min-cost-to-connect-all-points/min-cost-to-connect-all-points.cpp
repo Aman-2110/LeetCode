@@ -48,12 +48,12 @@ public:
         int n = points.size();
         DSU d(n);
         
-        priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> que;
+        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> que;
         
         for(int i = 0 ; i < n - 1 ; i++){
             for(int j = i + 1 ; j < n ; j++){
                 int dist = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1]);
-                que.push({dist, i, j});
+                que.push({dist, {i, j}});
             }
         }
 
@@ -63,11 +63,11 @@ public:
             auto p = que.top();
             que.pop();
 
-            int a = d.find(get<1>(p)), b = d.find(get<2>(p));
+            int a = d.find(p.second.first), b = d.find(p.second.second);
 
             if(a != b){
-                d.unite(get<1>(p), get<2>(p));
-                res += get<0>(p);
+                d.unite(p.second.first, p.second.second);
+                res += p.first;
                 if(count == n - 2)
                     break;
                 else
