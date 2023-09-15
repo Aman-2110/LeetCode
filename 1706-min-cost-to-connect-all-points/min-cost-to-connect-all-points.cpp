@@ -1,40 +1,77 @@
+class DSU {
+    int* parent;
+    int* rank;
+ 
+public:
+    DSU(int n)
+    {
+        parent = new int[n];
+        rank = new int[n];
+ 
+        for (int i = 0; i < n; i++) {
+            parent[i] = -1;
+            rank[i] = 1;
+        }
+    }
+ 
+    // Find function
+    int find(int i)
+    {
+        if (parent[i] == -1)
+            return i;
+ 
+        return parent[i] = find(parent[i]);
+    }
+ 
+    // Union function
+    void unite(int x, int y)
+    {
+        int s1 = find(x);
+        int s2 = find(y);
+ 
+        if (s1 != s2) {
+            if (rank[s1] <= rank[s2]) {
+                parent[s1] = s2;
+              	rank[s2] += rank[s1];
+            }
+            else {
+                parent[s2] = s1;
+              	rank[s1] += rank[s2];
+            }
+        }
+    }
+};
+
 class Solution {
 public:
     int minCostConnectPoints(vector<vector<int>>& points) {
         int n = points.size();
+        DSU d(n);
         
-        vector<vector<pair<int, int>>> adj(n);
+        priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> que;
+        
         for(int i = 0 ; i < n - 1 ; i++){
             for(int j = i + 1 ; j < n ; j++){
                 int dist = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1]);
-                adj[i].push_back({j, dist});
-                adj[j].push_back({i, dist});
+                que.push({dist, i, j});
             }
         }
-    
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> que;
 
-        
-        for(auto p : adj[0])
-            que.push({p.second, p.first});
-        
         int res = 0;
-        vector<bool> vis(n);
-        vis[0] = true;
-
+        int count = 0;
         while(!que.empty()){
             auto p = que.top();
             que.pop();
 
-            if(vis[p.second])
-                continue;
+            int a = d.find(get<1>(p)), b = d.find(get<2>(p));
 
-            res += p.first;
-            vis[p.second] = true;
-
-            for(auto q : adj[p.second]){
-                if(!vis[q.first])
-                    que.push({q.second, q.first});
+            if(a != b){
+                d.unite(get<1>(p), get<2>(p));
+                res += get<0>(p);
+                if(count == n - 2)
+                    break;
+                else
+                    count++;
             }
         }
 
