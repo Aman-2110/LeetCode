@@ -11,8 +11,7 @@
  */
 class Solution {
 public:
-    vector<vector<int>> res;
-    void helper(TreeNode* root, int targetSum, vector<int> &curr){
+    void helper(TreeNode* root, int targetSum, vector<int> &curr, vector<vector<int>> &res){
         if(!root)
             return;
 
@@ -21,16 +20,17 @@ public:
         if(root->val == targetSum && !root->left && !root->right){
             res.push_back(curr);
         }else{
-            helper(root->left, targetSum - root->val, curr);
-            helper(root->right, targetSum - root->val, curr);
+            helper(root->left, targetSum - root->val, curr, res);
+            helper(root->right, targetSum - root->val, curr, res);
         }
 
         curr.pop_back();
     }
 
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        vector<vector<int>> res;
         vector<int> curr;
-        helper(root, targetSum, curr);
+        helper(root, targetSum, curr, res);
         return res;
     }
 };
