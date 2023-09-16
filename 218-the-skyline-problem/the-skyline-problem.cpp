@@ -38,11 +38,8 @@ public:
             while(!que.empty() && get<1>(que.top()) > buildings[i][1])
                 que.pop();
             
-
-            if(que.empty())
-                res.push_back({buildings[i][1], 0});
-            else if(get<0>(que.top()) < buildings[i][2])
-                res.push_back({buildings[i][1], get<0>(que.top())});
+            if(que.empty() || get<0>(que.top()) < buildings[i][2])
+                res.push_back({buildings[i][1], que.empty() ? 0 : get<0>(que.top())});
             
             que.push({buildings[i][2], buildings[i][0], buildings[i][1]});
         }
@@ -52,5 +49,3 @@ public:
         return res;
     }
 };
-
-
