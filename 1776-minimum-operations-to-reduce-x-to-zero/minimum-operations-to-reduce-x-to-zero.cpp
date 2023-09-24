@@ -11,17 +11,23 @@ public:
         if(pre[n] < x) 
             return -1;
 
-        int i = 0, mini = INT_MAX;
+        int i = 0, j = lower_bound(suff.begin(), suff.end(), x) - suff.begin(), mini = INT_MAX;
+
         while(i <= n && pre[i] <= x){
-            int target = x - pre[i];
-            auto it = lower_bound(suff.begin(), suff.end(), target);
-            if(it != suff.end() && *it == target){
-                int ind = it - suff.begin();
-                mini = min(i + ind, mini);
-            }
-            i++;
+            if(pre[i] + suff[j] == x){
+                mini = min(i + j, mini);
+                i++;
+                j--;
+            }else if(pre[i] + suff[j] > x)
+                j--;
+            else
+                i++;
         }
 
         return mini == INT_MAX ? -1 : mini;
     }
 };
+
+
+// 0 1 2 6 8  11
+// 0 3 6 9 10 11
