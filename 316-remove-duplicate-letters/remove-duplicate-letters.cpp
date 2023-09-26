@@ -2,9 +2,9 @@ class Solution {
 public:
     string removeDuplicateLetters(string s) {
         int n = s.size();
-        unordered_map<char, int> mp;
+        vector<int> mp(26, -1);
         for(int i = 0 ; i < n ; i++)
-            mp[s[i]] = i;
+            mp[s[i] - 'a'] = i;
         
         stack<char> st;
         vector<bool> vis(26, false);
@@ -13,7 +13,7 @@ public:
             if(vis[s[i] - 'a'])
                 continue;
 
-            while(!st.empty() && st.top() > s[i] && mp[st.top()] >= i){
+            while(!st.empty() && st.top() > s[i] && mp[st.top() - 'a'] >= i){
                 vis[st.top() - 'a'] = false;
                 st.pop();
             }
