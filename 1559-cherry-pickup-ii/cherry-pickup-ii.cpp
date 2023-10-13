@@ -22,18 +22,18 @@ public:
 
     int cherryPickup(vector<vector<int>>& grid) {
         int m = grid.size(), n = grid[0].size();
+        
         int*** dp = new int**[m];
-        for(int i = 0; i < m; i++) {
+
+        for(int i = 0; i < m; i++){
             dp[i] = new int*[n];
-            for(int j = 0; j < n; j++) {
-                dp[i][j] = new int[n];
+            for(int j = 0; j < n; j++){
+                dp[i][j] = new int[n]; 
+                for (int k = 0; k < n; k++) {
+                    dp[i][j][k] = -1;
+                }
             }
         }
-
-        for(int i = 0 ; i < m ; i++)
-            for(int j = 0 ; j < n ; j++)
-                for(int k = 0 ; k < n ; k++)
-                    dp[i][j][k] = -1;
         
         return helper(0, 0, n - 1, grid, dp, m, n);
     }
