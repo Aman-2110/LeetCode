@@ -4,6 +4,7 @@ public:
         int n = nums.size();
         priority_queue<pair<int, int>> que;
         vector<int> dp(n);
+        int ans = nums[0];
         for(int i = 0 ; i < n ; i++){
             int t = 0;
             while(!que.empty()){
@@ -15,10 +16,10 @@ public:
             }
 
             dp[i] = nums[i] + t;
-
+            ans = max(dp[i], ans);
             que.push({dp[i], i});
         }
 
-        return *max_element(dp.begin(), dp.end());
+        return ans;
     }
 };
