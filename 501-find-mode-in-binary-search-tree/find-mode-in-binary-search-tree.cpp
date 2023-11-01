@@ -11,29 +11,35 @@
  */
 class Solution {
 public:
-    void preorder(TreeNode* root, unordered_map<int, int> &mp){
+    void inorder(TreeNode* root, int &maxi, int &currNum, int &currStreak, vector<int> &res){
         if(!root)
             return;
 
-        mp[root->val]++;
-        preorder(root->left, mp);
-        preorder(root->right, mp);
-    }
-    vector<int> findMode(TreeNode* root) {
-        unordered_map<int, int> mp;
-        preorder(root, mp);
-        int maxi = 0;
-        vector<int> res;
+        inorder(root->left, maxi, currNum, currStreak, res);
 
-        for(auto p : mp){
-            if(p.second > maxi){
-                res.clear();
-                res.push_back(p.first);
-                maxi = p.second;
-            }else if(p.second == maxi)
-                res.push_back(p.first);
+        int num = root->val;
+
+        if(currNum == num)
+            currStreak++;
+        else{
+            currNum = num; 
+            currStreak = 1;
         }
 
+        if(currStreak > maxi){
+            res.clear();
+            maxi = currStreak;
+        }
+        
+        if(currStreak == maxi)
+            res.push_back(num);
+
+        inorder(root->right, maxi, currNum, currStreak, res);
+    }
+    vector<int> findMode(TreeNode* root) {
+        int maxi = 0, currNum = -1e6, currStreak = 0;
+        vector<int> res;
+        inorder(root, maxi, currNum, currStreak, res);
         return res;
     }
 };
