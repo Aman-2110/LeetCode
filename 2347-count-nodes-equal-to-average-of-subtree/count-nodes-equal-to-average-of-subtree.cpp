@@ -11,17 +11,27 @@
  */
 class Solution {
 public:
-    pair<int, int> postOrder(TreeNode* root, int &count){
+    pair<int, int> dfs(TreeNode *root){
         if(!root)
             return {0, 0};
 
-        auto l = postOrder(root->left, count);
-        auto r = postOrder(root->right, count);
+        auto l = dfs(root->left);
+        auto r = dfs(root->right);
 
-        if(root->val == (l.first + r.first + root->val)/(l.second + r.second + 1))
+        return {root->val + l.first + r.first, 1 + l.second + r.second};
+    }
+
+    void postOrder(TreeNode* root, int &count){
+        if(!root)
+            return ;
+
+        auto p = dfs(root);
+
+        if(root->val == p.first / p.second)
             count++;
-        
-        return {l.first + r.first + root->val, l.second + r.second + 1};
+
+        postOrder(root->left, count);
+        postOrder(root->right, count);
     }
 
     int averageOfSubtree(TreeNode* root) {
