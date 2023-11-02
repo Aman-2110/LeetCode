@@ -11,32 +11,44 @@
  */
 class Solution {
 public:
-    pair<int, int> dfs(TreeNode *root){
+    int total;
+    int sum(TreeNode *root){
         if(!root)
-            return {0, 0};
+            return 0;
 
-        auto l = dfs(root->left);
-        auto r = dfs(root->right);
+        auto l = sum(root->left);
+        auto r = sum(root->right);
 
-        return {root->val + l.first + r.first, 1 + l.second + r.second};
+        return root->val + l + r;
     }
 
-    void postOrder(TreeNode* root, int &count){
+    int count(TreeNode *root){
+        if(!root)
+            return 0;
+
+        auto l = count(root->left);
+        auto r = count(root->right);
+
+        return 1 + l + r;
+    }
+
+    void preOrder(TreeNode* root){
         if(!root)
             return ;
 
-        auto p = dfs(root);
+        auto s = sum(root);
+        auto c = count(root);
 
-        if(root->val == p.first / p.second)
-            count++;
+        if(root->val == s / c)
+            total++;
 
-        postOrder(root->left, count);
-        postOrder(root->right, count);
+        preOrder(root->left);
+        preOrder(root->right);
     }
 
     int averageOfSubtree(TreeNode* root) {
-        int count = 0;
-        postOrder(root, count);
-        return count;
+        total = 0;
+        preOrder(root);
+        return total;
     }
 };
