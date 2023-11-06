@@ -1,33 +1,25 @@
 class SeatManager {
-    // Marker to point to unreserved seats.
-    int marker;
-
-    // Sorted set to store all unreserved seats.
-    set<int> availableSeats;
-
 public:
+    set<int> st;
     SeatManager(int n) {
-        // Set marker to the first unreserved seat.
-        marker = 1;
+        for(int i = 1 ; i <= n ; i++)
+            st.insert(i);
     }
-
+    
     int reserve() {
-        // If the sorted set has any element in it, then,
-        // get the smallest-numbered unreserved seat from it.
-        if (!availableSeats.empty()) {
-            int seatNumber = *availableSeats.begin();
-            availableSeats.erase(availableSeats.begin());
-            return seatNumber;
-        }
-
-        // Otherwise, the marker points to the smallest-numbered seat.
-        int seatNumber = marker;
-        marker++;
-        return seatNumber;
+        int a = *st.begin();
+        st.erase(a);
+        return a;
     }
-
+    
     void unreserve(int seatNumber) {
-        // Push unreserved seat in the sorted set.
-        availableSeats.insert(seatNumber);
+        st.insert(seatNumber);
     }
 };
+
+/**
+ * Your SeatManager object will be instantiated and called as such:
+ * SeatManager* obj = new SeatManager(n);
+ * int param_1 = obj->reserve();
+ * obj->unreserve(seatNumber);
+ */
