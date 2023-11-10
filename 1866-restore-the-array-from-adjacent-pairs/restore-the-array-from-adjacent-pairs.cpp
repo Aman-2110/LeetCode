@@ -1,6 +1,8 @@
 class Solution {
 public:
     vector<int> restoreArray(vector<vector<int>>& adjacentPairs) {
+        cin.tie(0)->sync_with_stdio(false);
+        cout.tie(0)->sync_with_stdio(false);
         unordered_map<int, vector<int>> mp;
         for(auto &v : adjacentPairs){
             mp[v[0]].push_back(v[1]);
@@ -31,7 +33,6 @@ public:
                 }
             }
         }
-        // res.push_back(root);
         return res;
     }
 };
