@@ -1,12 +1,5 @@
 class Solution {
 public:
-    void dfs(int root, int prev, vector<int> &res, unordered_map<int, vector<int>> &mp){
-        res.push_back(root);
-        for(auto child : mp[root]){
-            if(child != prev)
-                dfs(child, root, res, mp);
-        }
-    }
     vector<int> restoreArray(vector<vector<int>>& adjacentPairs) {
         unordered_map<int, vector<int>> mp;
         for(auto v : adjacentPairs){
@@ -23,7 +16,22 @@ public:
         }
 
         vector<int> res;
-        dfs(root, -1e6, res, mp);
+        res.push_back(root);
+        int prev = root;
+        root = mp[root][0];
+        res.push_back(root);
+
+        while(mp[root].size() != 1){
+            for(int i : mp[root]){
+                if(i != prev){
+                    res.push_back(i);
+                    prev = root;
+                    root = i;
+                    break;
+                }
+            }
+        }
+        // res.push_back(root);
         return res;
     }
 };
