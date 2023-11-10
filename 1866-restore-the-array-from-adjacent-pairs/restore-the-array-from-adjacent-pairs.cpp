@@ -2,13 +2,13 @@ class Solution {
 public:
     vector<int> restoreArray(vector<vector<int>>& adjacentPairs) {
         unordered_map<int, vector<int>> mp;
-        for(auto v : adjacentPairs){
+        for(auto &v : adjacentPairs){
             mp[v[0]].push_back(v[1]);
             mp[v[1]].push_back(v[0]);
         }
 
         int root = -1;
-        for(auto [key, value] : mp){
+        for(auto &[key, value] : mp){
             if(value.size() == 1){
                 root = key;
                 break;
@@ -22,7 +22,7 @@ public:
         res.push_back(root);
 
         while(mp[root].size() != 1){
-            for(int i : mp[root]){
+            for(int &i : mp[root]){
                 if(i != prev){
                     res.push_back(i);
                     prev = root;
