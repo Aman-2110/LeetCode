@@ -12,6 +12,8 @@ public:
     }
     
     int shortestPath(int node1, int node2) {
+        cin.tie(0)->sync_with_stdio(false);
+        cout.tie(0)->sync_with_stdio(false);
         vector<int> dist(adj.size(), INT_MAX);
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> que;
         que.push({0, node1});
