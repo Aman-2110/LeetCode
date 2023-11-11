@@ -2,12 +2,16 @@ class Graph {
 public:
     vector<vector<pair<int, int>>> adj;
     Graph(int n, vector<vector<int>>& edges) {
+        cin.tie(0)->sync_with_stdio(false);
+        cout.tie(0)->sync_with_stdio(false);
         adj.resize(n);
         for(auto &v : edges)
             adj[v[0]].push_back({v[1], v[2]});
     }
     
     void addEdge(vector<int> edge) {
+        cin.tie(0)->sync_with_stdio(false);
+        cout.tie(0)->sync_with_stdio(false);
         adj[edge[0]].push_back({edge[1], edge[2]});
     }
     
