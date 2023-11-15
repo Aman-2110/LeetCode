@@ -2,15 +2,15 @@ class Solution {
 public:
     int maximumElementAfterDecrementingAndRearranging(vector<int>& arr) {
         sort(arr.begin(), arr.end());
-        int j = 1;
+        int j = 0;
         for(int i : arr){
-            if(i == j - 1){
+            if(i == j){
                 continue;
             }else{
                 j++;
             }
         }
-        return j - 1;
+        return j;
     }
 };
 
