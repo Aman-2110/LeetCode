@@ -1,6 +1,7 @@
 class Solution {
 public:
     string findDifferentBinaryString(vector<string>& nums) {
+        cin.tie(0)->sync_with_stdio(0);
         unordered_set<int> st;
         int n = nums.size();
         
