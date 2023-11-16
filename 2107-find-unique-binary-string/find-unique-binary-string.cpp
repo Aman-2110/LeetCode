@@ -7,10 +7,10 @@ public:
         for(string s : nums)
             num.push_back(stoi(s, 0, 2));
 
-        sort(num.begin(), num.end());
+        unordered_set<int> st(num.begin(), num.end());
 
         for(int i = 0 ; i < n ; i++){
-            if(i != num[i]){
+            if(st.find(i) == st.end()){
                 string s = "";
                 while(i != 0){
                     if(i & 1)
@@ -39,6 +39,5 @@ public:
             s = '0' + s;
         }
         return s;
-        
     }
 };
