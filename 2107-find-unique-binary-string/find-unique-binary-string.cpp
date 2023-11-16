@@ -1,27 +1,26 @@
 class Solution {
 public:
     string findDifferentBinaryString(vector<string>& nums) {
-        vector<int> num;
+        unordered_set<int> st;
         int n = nums.size();
         
         for(string s : nums)
-            num.push_back(stoi(s, 0, 2));
-
-        unordered_set<int> st(num.begin(), num.end());
+            st.insert(stoi(s, 0, 2));
 
         for(int i = 0 ; i < n ; i++){
             if(st.find(i) == st.end()){
                 string s = "";
                 while(i != 0){
                     if(i & 1)
-                        s = '1' + s;
+                        s.push_back('1');
                     else
-                        s = '0' + s;
+                        s.push_back('0');
                     i /= 2;
                 }
                 while(s.size() != n){
-                    s = '0' + s;
+                    s.push_back('0');
                 }
+                reverse(s.begin(), s.end());
                 return s;
             }
         }
@@ -30,14 +29,15 @@ public:
         int i = n;
         while(i != 0){
             if(i & 1)
-                s = '1' + s;
+                s.push_back('1');
             else
-                s = '0' + s;
+               s.push_back('0');
             i /= 2;
         }
         while(s.size() != n){
-            s = '0' + s;
+            s.push_back('0');
         }
+        reverse(s.begin(), s.end());
         return s;
     }
 };
