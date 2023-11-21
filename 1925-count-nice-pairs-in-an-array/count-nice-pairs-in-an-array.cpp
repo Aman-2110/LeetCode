@@ -11,6 +11,7 @@ public:
     }
 
     int countNicePairs(vector<int>& nums) {
+        cin.tie(0)->sync_with_stdio(false);
         long res = 0, mod = 1e9 + 7, n = nums.size();
         unordered_map<int, int> mp;
         for(int i = 0 ; i < n ; i++){
