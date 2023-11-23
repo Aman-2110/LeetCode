@@ -1,6 +1,8 @@
 class Solution {
 public:
     vector<bool> checkArithmeticSubarrays(vector<int>& nums, vector<int>& l, vector<int>& r) {
+        cin.tie(0)->sync_with_stdio(0);
+        cout.tie(0)->sync_with_stdio(0);
         vector<bool> res;
         int n = l.size();
         for(int i = 0 ; i < n ; i++){
