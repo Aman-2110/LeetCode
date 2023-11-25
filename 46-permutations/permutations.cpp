@@ -18,6 +18,7 @@ public:
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
+        cin.tie(0)->sync_with_stdio(false);
         cout.tie(0)->sync_with_stdio(false);
         map<int, int> mp;
         for(int i : nums)
