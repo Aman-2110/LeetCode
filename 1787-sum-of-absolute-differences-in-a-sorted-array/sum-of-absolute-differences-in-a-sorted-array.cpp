@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<int> getSumAbsoluteDifferences(vector<int>& nums) {
+        cin.tie(0)->sync_with_stdio(false);
         int n = nums.size(), pre = nums[0], suf = nums[n - 1];
         vector<int> pref(n), suff(n), res(n);
         for(int i = 1 ; i < n ; i++){
