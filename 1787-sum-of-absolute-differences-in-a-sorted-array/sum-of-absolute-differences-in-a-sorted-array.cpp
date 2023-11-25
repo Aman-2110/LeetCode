@@ -11,7 +11,8 @@ public:
         }
 
         for(int i = 0 ; i < n ; i++){
-            res[i] = nums[i] * i - pref[i] + suff[i] - nums[i] * (n - i - 1);
+            // res[i] = nums[i] * i - pref[i] + suff[i] - nums[i] * (n - i - 1);
+            res[i] = nums[i] * (2*i - n +  1) + suff[i] - pref[i];
         }
 
         return res;
