@@ -25,23 +25,17 @@ public:
     }
 
     int strStr(string haystack, string needle) {
-        if(needle == "abbabbbabaa")
-            return 92;
-        if(needle == "bbbbbbaa")
-            return 118;
         vector<int> lps = getLPS(needle);
         int i = 0, j = 0, n = haystack.size(), m = needle.size();
         while(i != n){
             if(haystack[i] == needle[j]){
                 j++;
+                i++;
             }else if(j != 0){
-                j--;
-                j = lps[j];
-                if(haystack[i] == needle[j])
-                    j++;
+                j = lps[j - 1];
+            }else{
+                i++;
             }
-
-            i++;
 
             if(j == m)
                 return i - m;
