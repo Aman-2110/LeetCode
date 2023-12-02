@@ -1,6 +1,7 @@
 class Solution {
 public:
     int countCharacters(vector<string>& words, string chars) {
+        cin.tie(0)->sync_with_stdio(0);
         int res = 0;
         vector<int> vec(26, 0);
         for(char c : chars)
