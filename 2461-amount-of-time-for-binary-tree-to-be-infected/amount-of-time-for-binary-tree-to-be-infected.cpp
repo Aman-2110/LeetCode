@@ -28,6 +28,7 @@ public:
     }
 
     int amountOfTime(TreeNode* root, int start) {
+        cin.tie(0)->sync_with_stdio(false);
         vector<vector<int>> adj(1e5 + 1);
         vector<bool> vis(1e5 + 1, false);
         int count = 0, c = 0;
